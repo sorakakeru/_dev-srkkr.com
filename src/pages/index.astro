@@ -1,15 +1,23 @@
 ---
----
+import BaseLayout from '../layouts/_BaseLayouts.astro';
+import {sortByDate} from '../js/sort.js';
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+const allPosts = await Astro.glob("./article/*.md");
+---
+	
+<BaseLayout
+	pageTitle='srkkr.com'
+>
+	<nav  class="article_list">
+		<ul>
+			{
+        allPosts.sort(sortByDate).map((post) => (
+          <li><a href={post.url}>
+            <time datetime="{post.frontmatter.pubDate}">{post.frontmatter.pubDate}</time>
+            <h1 class="article_title">{post.frontmatter.title}</h1>
+          </a></li>
+        ))
+			}
+		</ul>
+	</nav>
+</BaseLayout>

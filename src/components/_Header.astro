@@ -1,0 +1,9 @@
+---
+import Navigation from "../components/_Navigation.astro";
+const {siteTitle} = Astro.props;
+---
+
+<header class="header" role="banner">
+  <div class="header_logo"><a href={Astro.site}>{siteTitle}</a></div>
+  <Navigation />
+</header>
